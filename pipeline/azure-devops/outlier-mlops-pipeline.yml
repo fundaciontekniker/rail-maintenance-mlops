@@ -1,0 +1,109 @@
+name: mlops-azure-machine-learning-reference
+
+variables:
+- template: config.yml
+
+# Endpoint configuration (replace)
+- name: endpoint_name
+  value: REPLACE_OUTLIER_BATCH_ENDPOINT_NAME
+- name: endpoint_type
+  value: batch
+
+trigger:
+  branches:
+    include:
+    - main
+  paths:
+    include:
+    - open-science/pipeline/**
+    - open-science/services/model-invoker/**
+    - open-science/sample-data/**
+
+pool:
+  vmImage: ubuntu-20.04
+
+stages:
+- stage: TestAndAnalysis
+  displayName: Unit tests and static code analysis
+
+  jobs:
+  - job: StaticCode
+    timeoutInMinutes: 30
+    steps:
+    - checkout: self
+    - task: UsePythonVersion@0
+      displayName: Use Python >=3.11
+      inputs:
+        versionSpec: '>=3.11'
+    - bash: |
+        set -e
+        cd open-science
+        python -m pip install -r requirements.txt
+        python -m pytest
+      displayName: Tests
+
+- stage: RunMLTrainingPipeline
+  displayName: Run AML training pipeline (example)
+  dependsOn: TestAndAnalysis
+
+  jobs:
+  - job: DeployTrainingPipeline
+    timeoutInMinutes: 120
+    steps:
+    - checkout: self
+    - bash: |
+        set -e
+        cd open-science
+      displayName: Enter repo
+    - template: azureml/install-az-cli.yml
+    - template: azureml/install-aml-cli.yml
+    - template: azureml/connect-to-workspace.yml
+    - template: azureml/create-compute.yml
+      parameters:
+        cluster_name: $(training_target)
+        size: $(training_target_sku)
+        min_instances: ${{ variables.training_target_min_nodes }}
+        max_instances: ${{ variables.training_target_max_nodes }}
+        cluster_tier: $(training_target_tier)
+    - template: azureml/register-environment.yml
+      parameters:
+        build_type: conda
+        environment_name: metro-maintenance-env
+        environment_file: open-science/pipeline/aml/environment.yml
+    - template: azureml/run-pipeline.yml
+      parameters:
+        pipeline_file: open-science/pipeline/ml-pipelines/outlier-ml-pipeline.yml
+        experiment_name: outlier_open_science_$(Build.SourceBranchName)
+        display_name: outlier_open_science_$(Build.BuildID)
+
+- stage: DeployBatchEndpoint
+  displayName: Deploy batch endpoint (reference)
+  dependsOn: RunMLTrainingPipeline
+  condition: succeeded()
+
+  jobs:
+  - job: Deploy
+    timeoutInMinutes: 60
+    steps:
+    - checkout: self
+    - template: azureml/install-aml-cli.yml
+    - template: azureml/connect-to-workspace.yml
+    - template: azureml/create-compute.yml
+      parameters:
+        cluster_name: batch-cluster
+        size: $(training_target_sku)
+        min_instances: ${{ variables.training_target_min_nodes }}
+        max_instances: ${{ variables.training_target_max_nodes }}
+        cluster_tier: $(training_target_tier)
+    - template: azureml/create-endpoint.yml
+      parameters:
+        endpoint_file: open-science/pipeline/azure-devops/deploy/batch/outlier-batch-endpoint.yml
+    - template: azureml/create-deployment.yml
+      parameters:
+        deployment_name: green-outliers-batch
+        deployment_file: open-science/pipeline/azure-devops/deploy/batch/outlier-batch-deployment.yml
+    - template: azureml/test-deployment.yml
+      parameters:
+        deployment_name: green-outliers-batch
+        sample_request: open-science/sample-data/kpi/kpis.csv
+        request_type: uri_file

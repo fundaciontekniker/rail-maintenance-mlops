@@ -1,0 +1,40 @@
+namespace MetroMaintenance.KpiCalculator;
+
+public sealed record SignalDescriptors(
+    double Rms,
+    double Median,
+    double Mean,
+    double Mode,
+    double TrimmedMean,
+    double GeometricMean,
+    double HarmonicMean,
+    double Range,
+    double StandardDeviation,
+    double Variance,
+    double MeanAbsoluteDeviation,
+    double InterquartileRange,
+    double Skewness,
+    double ThirdCentralMoment,
+    double PeakToPeak,
+    double PeakValue,
+    double Kurtosis,
+    double CrestFactor,
+    double ClearanceFactor,
+    double ImpulseFactor,
+    double ShapeFactor,
+    double Power);
+
+public sealed record FrequencyDescriptors(
+    double F1,
+    double Rms1,
+    double Sum1,
+    double F2,
+    double Rms2,
+    double Sum2,
+    double F3,
+    double Rms3,
+    double Sum3,
+    double Rms0To500,
+    double Rms500To1000,
+    double Rms1000To2500,
+    double Rms2500To5000);

@@ -1,0 +1,6 @@
+$schema: https://azuremlschemas.azureedge.net/latest/environment.schema.json
+name: metro-maintenance-env
+version: 1
+description: Reproducible environment for the public modelling pipelines.
+image: mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu22.04:20261026.v1@sha256:45b84003c40e2e0105d4800cdf99a3e8f487ab5358c25f9f90242763101edc26
+conda_file: ../environment/conda.yml

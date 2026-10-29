@@ -1,0 +1,5 @@
+timestamp,project_name,run_id,experiment_id,duration,emissions,emissions_rate,cpu_power,gpu_power,ram_power,cpu_energy,gpu_energy,ram_energy,energy_consumed,country_name,country_iso_code,region,cloud_provider,cloud_region,os,python_version,codecarbon_version,cpu_count,cpu_model,gpu_count,gpu_model,longitude,latitude,ram_total_size,tracking_mode,on_cloud,pue
+,metro-maintenance-ML-training-reconstructed,,,,0.00143,,,,,,,,,,,,,,,,2.4.1,,,,,,,,,,
+,metro-maintenance-DL-training-reconstructed,,,,0.01291,,,,,,,,,,,,,,,,2.4.1,,,,,,,,,,
+,metro-maintenance-ML-inference-reconstructed,,,,0.000000104,,,,,,,,,,,,,,,,2.4.1,,,,,,,,,,
+,metro-maintenance-DL-inference-reconstructed,,,,0.000000124,,,,,,,,,,,,,,,,2.4.1,,,,,,,,,,

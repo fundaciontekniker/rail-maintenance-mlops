@@ -1,0 +1,26 @@
+$schema: https://azuremlschemas.azureedge.net/latest/batchDeployment.schema.json
+name: batch-dp
+endpoint_name: ${endpoint_name}
+
+# Replace with your registered model name/version.
+model: azureml:REPLACE_MODEL_NAME@latest
+
+compute: azureml:batch-cluster
+resources:
+  instance_count: 1
+
+# Replace with your scoring code.
+code_configuration:
+  code: ../scoring-scripts
+  scoring_script: outliers-scoring-script.py
+
+environment: azureml:metro-maintenance-open-science@latest
+max_concurrency_per_instance: 2
+mini_batch_size: 10
+output_action: append_row
+output_file_name: outliers.csv
+retry_settings:
+  max_retries: 3
+  timeout: 30
+error_threshold: -1
+logging_level: info

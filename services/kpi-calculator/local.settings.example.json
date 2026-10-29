@@ -1,0 +1,11 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "DataStorage": "UseDevelopmentStorage=true",
+    "KpiStorage": "UseDevelopmentStorage=true",
+    "RawContainer": "raw-signals",
+    "KpiContainer": "kpis"
+  }
+}

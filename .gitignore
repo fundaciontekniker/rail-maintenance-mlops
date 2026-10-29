@@ -1,0 +1,30 @@
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+**/local.settings.json
+config.json
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# .NET and editors
+.vs/
+.vscode/
+bin/
+obj/
+*.user
+*.suo
+
+# Generated research outputs
+artifacts/
+mlruns/
+outputs/
+*.joblib

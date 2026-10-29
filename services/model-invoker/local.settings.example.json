@@ -1,0 +1,22 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "DataStorage": "UseDevelopmentStorage=true",
+    "KpiContainer": "kpis",
+    "InputDatastore": "REPLACE_AML_INPUT_DATASTORE",
+    "OutputDatastore": "REPLACE_AML_OUTPUT_DATASTORE",
+    "OutlierEndpointUrl": "https://REPLACE_OUTLIER_ENDPOINT/jobs",
+    "OutlierInputName": "input",
+    "OutlierOutputPath": "outliers",
+    "LubricationEndpointUrl": "https://REPLACE_LUBRICATION_ENDPOINT/jobs",
+    "LubricationInputName": "input",
+    "LubricationOutputPath": "lubrication",
+    "SensorHealthSchedule": "0 45 23 * * *",
+    "SensorHealthEndpointUrl": "https://REPLACE_SENSOR_ENDPOINT/jobs",
+    "SensorHealthInputName": "input",
+    "SensorHealthInputUri": "azureml://datastores/REPLACE_AML_INPUT_DATASTORE/paths/",
+    "SensorHealthOutputUri": "azureml://datastores/REPLACE_AML_OUTPUT_DATASTORE/paths/sensor-health/{yyyy}-{MM}-{dd}.csv"
+  }
+}

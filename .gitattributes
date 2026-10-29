@@ -1,0 +1,23 @@
+# Normalise line endings in text files to LF in the repository
+* text=auto
+
+# Source and documentation
+*.py   text
+*.cs   text
+*.json text
+*.yml  text
+*.yaml text
+*.md   text
+*.csv  text
+*.cff  text
+*.ini  text
+
+# Windows scripts keep CRLF
+*.ps1  text eol=crlf
+*.bat  text eol=crlf
+
+# Binary data and assets
+*.mat    binary
+*.ipynb  text eol=lf
+*.png    binary
+*.joblib binary

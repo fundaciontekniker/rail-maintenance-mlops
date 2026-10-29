@@ -1,0 +1,13 @@
+{
+  "folders": [
+    { "name": "KPI calculator", "path": "kpi-calculator" },
+    { "name": "Model invoker", "path": "model-invoker" }
+  ],
+  "extensions": {
+    "recommendations": [
+      "ms-dotnettools.csharp",
+      "ms-azuretools.vscode-azurefunctions",
+      "Azurite.azurite"
+    ]
+  }
+}

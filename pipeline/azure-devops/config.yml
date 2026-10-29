@@ -1,0 +1,15 @@
+variables:
+  # Azure DevOps service connections (replace with your organisation's names)
+  ado_service_connection_rg: REPLACE_ADO_SERVICE_CONNECTION
+  ado_service_connection_aml_ws: REPLACE_ADO_SERVICE_CONNECTION
+
+  # Azure ML workspace target
+  resource_group: REPLACE_RESOURCE_GROUP
+  aml_workspace: REPLACE_AML_WORKSPACE
+
+  # Compute target defaults
+  training_target: cpu-cluster
+  training_target_sku: Standard_F4s_v2
+  training_target_min_nodes: 0
+  training_target_max_nodes: 4
+  training_target_tier: dedicated

@@ -1,0 +1,65 @@
+This repository accompanies the paper "Data-Driven Metro Rail Maintenance
+within a Sustainability-Oriented MLOps paradigm."
+
+THIRD-PARTY CODE AND ATTRIBUTION
+================================
+
+The MLOps orchestration structure was informed by the following upstream
+project:
+
+  Project: Azure MLOps v2 Azure DevOps demo
+  URL:     https://github.com/Azure/mlops-v2-ado-demo
+  Owner:   Microsoft Corporation
+  Licence: MIT License
+
+Only the Azure ML CLI step templates under pipeline/azure-devops/azureml/ are
+reused or copied from that upstream project. They carry the upstream copyright
+header:
+
+  - pipeline/azure-devops/azureml/connect-to-workspace.yml
+  - pipeline/azure-devops/azureml/create-compute.yml
+  - pipeline/azure-devops/azureml/create-deployment-default.yml
+  - pipeline/azure-devops/azureml/create-deployment.yml
+  - pipeline/azure-devops/azureml/create-endpoint.yml
+  - pipeline/azure-devops/azureml/install-aml-cli.yml
+  - pipeline/azure-devops/azureml/install-az-cli.yml
+  - pipeline/azure-devops/azureml/register-data.yml
+  - pipeline/azure-devops/azureml/register-environment.yml
+  - pipeline/azure-devops/azureml/run-pipeline.yml
+  - pipeline/azure-devops/azureml/test-deployment.yml
+
+The remaining Azure DevOps configuration (pipeline/azure-devops/ outside
+azureml/, for example config.yml, outlier-mlops-pipeline.yml, and
+deploy/batch/*.yml) and the AML definitions under pipeline/aml/ were adapted
+from the same upstream project. The upstream MIT terms below apply to those
+reused and adapted portions. Everything else in this repository is original
+work by the authors.
+
+Nothing in this repository implies endorsement by Microsoft. The upstream
+project is distributed under the MIT License, reproduced below.
+
+UPSTREAM MIT LICENCE TEXT
+=========================
+
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+No endorsement by Microsoft or the metro operator is implied by this
+repository or by the paper it accompanies.

@@ -1,0 +1,40 @@
+$schema: https://azuremlschemas.azureedge.net/latest/pipelineJob.schema.json
+type: pipeline
+display_name: open_science_outlier_training
+description: Random forest classifier for outlier detection (open-science reference).
+
+inputs:
+  kpi_data:
+    type: uri_folder
+    path: azureml://datastores/kpi_datastore/paths/
+  outlier_labels:
+    type: uri_file
+    # Local path is uploaded when submitting the job.
+    path: ../../sample-data/labels/outlier-labels.csv
+
+outputs:
+  model_output:
+    type: uri_folder
+
+settings:
+  default_datastore: azureml:workspaceblobstore
+  default_compute: azureml:cpu-cluster
+  continue_on_step_failure: false
+
+jobs:
+  train_outlier:
+    type: command
+    display_name: train outlier classifier
+    code: ../src
+    command: >-
+      python train_outlier.py
+      --kpi-data ${{inputs.kpi_data}}
+      --labels ${{inputs.outlier_labels}}
+      --output ${{outputs.model_output}}
+      --seed 42
+    environment: azureml:metro-maintenance-env:1
+    inputs:
+      kpi_data: ${{parent.inputs.kpi_data}}
+      outlier_labels: ${{parent.inputs.outlier_labels}}
+    outputs:
+      model_output: ${{parent.outputs.model_output}}
